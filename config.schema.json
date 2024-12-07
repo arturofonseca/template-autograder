@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "lab_name": {
+      "type": "string"
+    },
+    "files_needed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "max_submissions": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer",
+          "minimum": 0
+        }
+      ]
+    },
+    "max_late_days": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "no_penalty_days": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "penalty": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "max_submissions": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer",
+                "minimum": 0
+              }
+            ]
+          },
+          "max_late_days": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "no_penalty_days": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "penalty": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": ["no_penalty_days"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "lab_name",
+    "files_needed",
+    "max_submissions",
+    "max_late_days",
+    "no_penalty_days",
+    "penalty",
+    "extensions"
+  ],
+  "additionalProperties": false
+}

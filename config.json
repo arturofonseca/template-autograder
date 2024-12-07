@@ -1,0 +1,16 @@
+{
+  "lab_name": "Lab 2",
+  "files_needed": [
+    "lab2.py"
+  ],
+  "max_submissions": 10,
+  "max_late_days": 14,
+  "no_penalty_days": 0,
+  "penalty": 1,
+  "extensions": {
+    "student@u.northwestern.edu": {
+      "max_submissions": null,
+      "no_penalty_days": 3
+    }
+  }
+}
