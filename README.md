@@ -17,12 +17,12 @@ Files to modify (optional):
 - `requirements.txt`: dependencies for this lab (**do not modify lines 1-3**)
 - `tests/test_simple.py`: unit tests for this lab
 
-> _Additionally, the `tests/`directory and `run_tests.py` can be deleted entirely if not using Gradescope utils to grade
+> _Additionally, the `tests/`directory and `run_tests.py` can be deleted entirely if not using Gradescope utils to grade_
 
 Files to add (optional):
 - Any data or additional Python files should be added to the project root
 
-**Note**: all other provided files should be left unmodified
+> **Note**: all other provided files should be left unmodified
 
 ### `config.json`
 Required keys in this file are:
