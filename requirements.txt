@@ -1,4 +1,4 @@
-gradescope-utils>=0.3.1  # required for autograder
+gradescope-utils>=0.3.1  # required for autograder (only if using Gradescope utils)
 pytz~=2024.1             # required for autograder
 jsonschema~=4.21.1       # required for autograder
 

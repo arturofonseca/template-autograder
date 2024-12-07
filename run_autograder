@@ -2,8 +2,10 @@
 
 # Set up autograder files
 
+cd /autograder/source || exit 1
+
 files_needed=$(python3 -c "
-from source.grader import Grader
+from grader import Grader
 
 config = Grader.read_json('source', 'config.json')
 print(' '.join(config['files_needed']))
@@ -12,8 +14,6 @@ print(' '.join(config['files_needed']))
 for file in $files_needed; do
     cp /autograder/submission/"$file" /autograder/source/"$file"
 done
-
-cd /autograder/source || exit 1
 
 python3 run_tests.py
 python3 grader.py
