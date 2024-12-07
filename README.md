@@ -56,7 +56,7 @@ Example `config.json`:
   "extensions": {
     "firstlast2030@u.northwestern.edu": {  // a student's email
       "no_penalty_days": 3,     // 3 days to submit after due date
-      "max_submissions": false, // (optional) unlimited submissions
+      "max_submissions": null // (optional) unlimited submissions
       // "penalty" (optional) not specified here, so use the one above
     }
   }
