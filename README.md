@@ -17,10 +17,11 @@ Files to modify (optional):
 - `requirements.txt`: dependencies for this lab (**do not modify lines 1-3**)
 - `tests/test_simple.py`: unit tests for this lab
 
-> _Additionally, the `tests/`directory and `run_tests.py` can be deleted entirely if not using Gradescope utilities to autograde_
+> _Additionally, the `tests/`directory and `run_tests.py` can be deleted entirely if not using Gradescope utils to grade
 
 Files to add (optional):
 - Any data or additional Python files should be added to the project root
+
 **Note**: all other provided files should be left unmodified
 
 ### `config.json`
@@ -34,7 +35,7 @@ Required keys in this file are:
 - `extensions` (object): a dictionary of student emails to a dictionary of their unique extension 
   circumstances
   - Leave empty if there are no extensions (`{}`)
-  - Each dictionary must has `no_penalty_days` key. `max_late_days` and `penalty` are optional.
+  - Each dictionary must have a `no_penalty_days` key. The `max_late_days` and `penalty` keys are optional.
   - Constants inside each student's dictionary will override the outer-level constants.
     (`"student@email.com": {"no_penalty_days": 7}`). Constants not specified inside a student's
     dictionary will be defaulted to the ones specified above.
