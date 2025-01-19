@@ -1,3 +1,5 @@
+"""Testing whether all required files are present."""
+
 import unittest
 
 from gradescope_utils.autograder_utils.decorators import weight

@@ -25,7 +25,7 @@ print('\n'.join(config['files_needed']))
 IFS=$'\n'  # Delimiter
 for file in $files_needed; do
     if [ -e "/autograder/submission/$file" ]; then
-        cp "/autograder/submission/$file" "/autograder/source/$file"
+        cp "/autograder/submission/$file" "/autograder/source/files/$file"
     else
         echo "Warning: $file not found in /autograder/submission."
     fi
