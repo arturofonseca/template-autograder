@@ -18,5 +18,5 @@ class TestLabX(unittest.TestCase):
     @weight(10)
     @number("0")
     def test_func(self) -> None:
-        """Test whether loading breeds works."""
-        assert True
+        """Test whether function works."""
+        assert True, "This function is indeed True"
