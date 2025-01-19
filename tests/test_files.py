@@ -3,9 +3,9 @@ import unittest
 from gradescope_utils.autograder_utils.decorators import weight
 from gradescope_utils.autograder_utils.files import check_submitted_files
 
-from grader import Grader
+from processor import SubmissionProcessor
 
-config = Grader.read_json("source", "config.json")
+config = SubmissionProcessor.read_json("source", "config.json")
 
 
 class TestFiles(unittest.TestCase):

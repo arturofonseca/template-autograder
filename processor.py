@@ -4,8 +4,9 @@ This file modifies a student's autograder score.
 This is done by updating results.json, deducting any late points,
 and capping their submission count.
 
-Author: Arturo Fonseca
-Date: December 10, 2024
+Authors: Anastasia Kurdia
+         Arturo Fonseca
+Date: January 20, 2025
 """
 
 import json
@@ -18,15 +19,15 @@ from jsonschema import ValidationError, validate  # type: ignore
 from pytz import timezone  # type: ignore
 
 
-class Grader:
-    """A class to handle the grading of student submissions.
+class SubmissionProcessor:
+    """A class to process the of student submissions.
 
     This class reads configuration and submission data, applies grading rules,
     and calculates the final score for a submission based on various criteria
     such as submission limits and late penalties.
 
     Attributes:
-        root (str): The root directory for the grader.
+        root (str): The root directory of SubmissionProcessor.
         _config (dict): The config.json data.
         _schema (dict): The schema for config.json.
         _results (dict): The results.json data.
@@ -46,7 +47,7 @@ class Grader:
     root = "/autograder"
 
     def __init__(self) -> None:
-        """Initialize the Grader instance."""
+        """Initialize the SubmissionProcessor instance."""
         # Setup
         self._config = self.read_json("source", "config.json")
         self._schema = self.read_json("source", "config.schema.json")
@@ -73,10 +74,11 @@ class Grader:
         )
         self._exceeded_limit = False
 
-    def grade(self) -> None:
-        """Grade the student's submission."""
+    def process(self) -> None:
+        """Process the student's submission."""
         self._limit_submission_count()
         self._apply_late_penalty()
+        self.write_json(self._results, "results", "results.json")
 
     def _limit_submission_count(self) -> None:
         """Update the score if the submission limit exceeded."""
@@ -107,10 +109,9 @@ class Grader:
             )
             self._exceeded_limit = True
 
-        # Update results.json
+        # Update the results
         self._results["output"] = self._results.get("output", "") + output
         self._results["score"] = self._total_marks
-        self.write_json(self._results, "results", "results.json")
 
     def _apply_late_penalty(self) -> None:
         """Apply late penalties to the student's submission."""
@@ -167,10 +168,9 @@ class Grader:
             )
             self._total_marks = max(self._min_marks, self._total_marks - total_penalty)
 
-        # Update results.json
+        # Update the results
         self._results["output"] = self._results.get("output", "") + output
         self._results["score"] = self._total_marks
-        self.write_json(self._results, "results", "results.json")
 
     def _validate_config(self) -> None:
         """Validate the configuration against the schema.
@@ -282,7 +282,9 @@ class Grader:
         Returns:
             dict[str, Any]: The parsed JSON content as a dictionary.
         """
-        with open(os.path.join(Grader.root, *path_args), encoding="utf-8") as f:
+        with open(
+            os.path.join(SubmissionProcessor.root, *path_args), encoding="utf-8"
+        ) as f:
             return json.load(f)  # type: ignore
 
     @staticmethod
@@ -293,14 +295,16 @@ class Grader:
             json_dict (dict[str, Any]): The dictionary to be written to the JSON file.
             *path_args (str): Components of the file path.
         """
-        with open(os.path.join(Grader.root, *path_args), "w", encoding="utf-8") as f:
+        with open(
+            os.path.join(SubmissionProcessor.root, *path_args), "w", encoding="utf-8"
+        ) as f:
             json.dump(json_dict, f, indent=2)
 
 
 def main() -> None:
     """Run the program."""
-    grader = Grader()
-    grader.grade()
+    processor = SubmissionProcessor()
+    processor.process()
 
 
 if __name__ == "__main__":

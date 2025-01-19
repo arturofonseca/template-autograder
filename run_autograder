@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
-# This file shouldn't need to be modified
+# This file can, but shouldn't need to be modified
 # Set up autograder files
 
 # Go to our directory (our current root) in the autograder
-cd /autograder/source || exit 1
+cd /autograder/source || {
+  echo "Autograder source directory not found"
+  exit 1
+}
 
 # Get a list of required files by looking at config
 files_needed=$(python3 -c "
-from grader import Grader
+from processor import SubmissionProcessor
 
-config = Grader.read_json('source', 'config.json')
+config = SubmissionProcessor.read_json('source', 'config.json')
 print('\n'.join(config['files_needed']))
 ") || {
 # If it fails, just return early
@@ -18,8 +21,8 @@ print('\n'.join(config['files_needed']))
     exit 1
 }
 
-# For each file (seperated by a newline), copy it if present, otherwise just skip
-IFS=$'\n'
+# For each file (seperated by a newline), copy it to source/ if present, otherwise just skip
+IFS=$'\n'  # Delimiter
 for file in $files_needed; do
     if [ -e "/autograder/submission/$file" ]; then
         cp "/autograder/submission/$file" "/autograder/source/$file"
@@ -27,7 +30,8 @@ for file in $files_needed; do
         echo "Warning: $file not found in /autograder/submission."
     fi
 done
+IFS=$original_ifs
 
 # Finally, grade this submission
 python3 run_tests.py
-python3 grader.py
+python3 processor.py
