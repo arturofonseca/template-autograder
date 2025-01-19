@@ -1,5 +1,7 @@
 # Getting started with the autograder
 
+**- Note: the following template is of Lab 2 (see `files/` and `tests/test_simple.py`).**
+
 ## Files
 
 **Files to modify (mandatory):**
