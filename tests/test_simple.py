@@ -6,6 +6,8 @@ from gradescope_utils.autograder_utils.decorators import number, weight
 
 
 class TestLabX(unittest.TestCase):
+    """Class to test the student's submission."""
+
     def setUp(self) -> None:
         """Set up the tests.
 
