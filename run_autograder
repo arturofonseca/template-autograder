@@ -9,11 +9,11 @@ cd /autograder/source || {
   exit 1
 }
 
-# Get a list of required files by looking at config
+# Get a list of required files by looking at config.json
 files_needed=$(python3 -c "
-from processor import SubmissionProcessor
+from processor.SubmissionProcessor import read_json
 
-config = SubmissionProcessor.read_json('source', 'config.json')
+config = read_json('source', 'config.json')
 print('\n'.join(config['files_needed']))
 ") || {
 # If it fails, just return early
@@ -21,7 +21,7 @@ print('\n'.join(config['files_needed']))
     exit 1
 }
 
-# For each file (seperated by a newline), copy it to source/ if present, otherwise just skip
+# For each file (separated by a newline), copy it to source/files/ if present, otherwise just skip
 IFS=$'\n'  # Delimiter
 for file in $files_needed; do
     if [ -e "/autograder/submission/$file" ]; then
