@@ -11,9 +11,9 @@ cd /autograder/source || {
 
 # Get a list of required files by looking at config.json
 files_needed=$(python3 -c "
-from processor.SubmissionProcessor import read_json
+from processor import SubmissionProcessor as p
 
-config = read_json('source', 'config.json')
+config = p.read_json('source', 'config.json')
 print('\n'.join(config['files_needed']))
 ") || {
 # If it fails, just return early
